@@ -1,0 +1,36 @@
+REM Carlos PImentel
+REM reading Memory
+REM Command | string to lookup  >> save_in_thefile
+ctconf -v | findstr /C:"Free Memory" > C:\temp\result.txt
+REM reading a file saved and creating a vairable
+ 
+setLocal EnableDelayedExpansion
+FOR /f  "tokens=4 delims= " %%a IN  (C:\temp\result.txt) DO (
+set /a N+=1
+set v[!N!]=%%a
+)
+set line1=%v[1]%
+ 
+echo %line1% >> C:\temp\tracking.txt
+ 
+timeout 4
+REM cheking the treshold
+IF %line1% LEQ 40000000 GOTO err
+IF %line1% GTR 40000000 (IF %line1% LEQ 80000000 ( GOTO err2))
+IF %line1% GTR 80000000 GOTO ok
+ 
+:err
+echo KO > C:\temp\status.txt
+echo KO >> C:\temp\status.txt
+exit /B 1
+ 
+:err2
+echo echo KO > C:\temp\status.tx
+exit /B 3
+ 
+:ok
+echo OK > C:\temp\status.txt
+exit /B 0
+ 
+ 
+endlocal
