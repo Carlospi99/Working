@@ -25,14 +25,17 @@ if %errorlevel%==0 ( GOTO err )
 :err
 echo KO > C:\temp\status.txt
 echo KO >> C:\temp\status.txt
+echo %DATE% %TIME% : CRITICAL >> C:\temp\status_Track.txt
 exit /B 1
  
 :err2
 echo KO > C:\temp\status.txt
+echo %DATE% %TIME% : WARNING  >> C:\temp\status_Track.txt
 exit /B 3
  
 :ok
 echo OK > C:\temp\status.txt
+echo %DATE% %TIME% : GOOD  >> C:\temp\status_Track.txt
 exit /B 0
  
  
