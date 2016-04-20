@@ -10,14 +10,18 @@ set /a N+=1
 set v[!N!]=%%a
 )
 set line1=%v[1]%
- 
+
+echo %DATE% %TIME% >> C:\temp\tracking.txt 
 echo %line1% >> C:\temp\tracking.txt
+echo %line1% > C:\temp\tracking_unav.txt
  
 REM cheking the treshold
 IF %line1% LEQ 75000000 GOTO err
 IF %line1% GTR 75000000 (IF %line1% LEQ 80000000 ( GOTO err2))
-IF %line1% GTR 80000000 GOTO ok
-IF %line1% == "UNAVAILABLE"  GOTO err
+IF %line1% GTR 80000000 (IF %line1% LEQ 120000000 (GOTO ok))
+findstr "UNAVAILABLE" C:\temp\tracking_unav.txt 
+if %errorlevel%==0 ( echo KO ) > C:\temp\status.txt
+if %errorlevel%==0 ( echo KO ) >> C:\temp\status.txt
  
 :err
 echo KO > C:\temp\status.txt
