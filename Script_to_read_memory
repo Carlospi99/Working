@@ -17,6 +17,7 @@ REM cheking the treshold
 IF %line1% LEQ 75000000 GOTO err
 IF %line1% GTR 75000000 (IF %line1% LEQ 80000000 ( GOTO err2))
 IF %line1% GTR 80000000 GOTO ok
+IF %line1% == "UNAVAILABLE"  GOTO err
  
 :err
 echo KO > C:\temp\status.txt
