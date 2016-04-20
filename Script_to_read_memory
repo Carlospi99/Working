@@ -14,8 +14,8 @@ set line1=%v[1]%
 echo %line1% >> C:\temp\tracking.txt
  
 REM cheking the treshold
-IF %line1% LEQ 40000000 GOTO err
-IF %line1% GTR 40000000 (IF %line1% LEQ 80000000 ( GOTO err2))
+IF %line1% LEQ 75000000 GOTO err
+IF %line1% GTR 75000000 (IF %line1% LEQ 80000000 ( GOTO err2))
 IF %line1% GTR 80000000 GOTO ok
  
 :err
