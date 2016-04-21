@@ -19,6 +19,10 @@ REM cheking the treshold
 IF %line1% LEQ 75000000 GOTO err
 IF %line1% GTR 75000000 (IF %line1% LEQ 80000000 ( GOTO err2))
 IF %line1% GTR 80000000 (IF %line1% LEQ 120000000 (GOTO ok))
+
+REM if any letter on the unavailable word is find
+findstr /r "^[a-z][A-Z]*$" C:\temp\tracking_unav.txt 
+if %errorlevel%==0 ( GOTO err )
 findstr "UNAVAILABLE" C:\temp\tracking_unav.txt 
 if %errorlevel%==0 ( GOTO err )
 
